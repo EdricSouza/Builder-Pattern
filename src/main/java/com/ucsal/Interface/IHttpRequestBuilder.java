@@ -5,13 +5,12 @@ import java.util.Map;
 import com.ucsal.HttpRequest.HttpRequest;
 
 public interface IHttpRequestBuilder {
-    public IHttpRequestBuilder Url (String url);
-    public IHttpRequestBuilder Method (String method);
-    public IHttpRequestBuilder Header (Map<String, String> headers);
-    public IHttpRequestBuilder QueryParameters (Map<String, String> queryParams);
-    public IHttpRequestBuilder Body (String body);
-    public IHttpRequestBuilder ContentType (String contentType);
-    public IHttpRequestBuilder AuthorizationToken (String authorizationToken);
-    
-    public HttpRequest build();
+    IHttpRequestBuilder url (String url);
+    IHttpRequestBuilder method (String method);
+    IHttpRequestBuilder header (Map<String, String> headers);
+    IHttpRequestBuilder queryParameters (Map<String, String> queryParams);
+    IHttpRequestBuilder body (String body);
+    IHttpRequestBuilder contentType (String contentType);
+    IHttpRequestBuilder authorizationToken (String authorizationToken);
+    HttpRequest build();
 }

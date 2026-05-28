@@ -34,4 +34,17 @@ public class HttpRequest {
     public HttpResponse send () {
         throw new UnsupportedOperationException("Sem implementação real");
     }
+
+    @Override
+    public String toString() {
+        return "HttpRequest{" +
+                "url='" + url + '\'' +
+                ", method='" + method + '\'' +
+                ", headers=" + headers +
+                ", queryParams=" + queryParams +
+                ", body='" + body + '\'' +
+                ", contentType='" + contentType + '\'' +
+                ", authorizationToken='" + authorizationToken + '\'' +
+                '}';
+    }
 }

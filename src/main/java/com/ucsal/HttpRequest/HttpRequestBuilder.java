@@ -1,9 +1,8 @@
 package com.ucsal.HttpRequest;
 
-import java.net.http.HttpResponse;
-import java.util.Map;
-
 import com.ucsal.Interface.IHttpRequestBuilder;
+
+import java.util.Map;
 
 public class HttpRequestBuilder implements IHttpRequestBuilder {
 
@@ -16,37 +15,37 @@ public class HttpRequestBuilder implements IHttpRequestBuilder {
     private String authorizationToken;
 
     @Override
-    public IHttpRequestBuilder Url(String url) {
+    public IHttpRequestBuilder url(String url) {
         this.url = url;
         return this;
     }
     @Override
-    public IHttpRequestBuilder Method(String method) {
+    public IHttpRequestBuilder method(String method) {
         this.method = method;
         return this;
     }
     @Override
-    public IHttpRequestBuilder Header(Map<String, String> headers) {
+    public IHttpRequestBuilder header(Map<String, String> headers) {
         this.headers = headers;
         return this;
     }
     @Override
-    public IHttpRequestBuilder QueryParameters(Map<String, String> queryParams) {
+    public IHttpRequestBuilder queryParameters(Map<String, String> queryParams) {
         this.queryParams = queryParams;
         return this;
     }
     @Override
-    public IHttpRequestBuilder Body(String body) {
+    public IHttpRequestBuilder body(String body) {
         this.body = body;
         return this;
     }
     @Override
-	public IHttpRequestBuilder ContentType(String contentType) {
+	public IHttpRequestBuilder contentType(String contentType) {
 		this.contentType = contentType;
         return this;
 	}
     @Override
-	public IHttpRequestBuilder AuthorizationToken(String authorizationToken) {
+	public IHttpRequestBuilder authorizationToken(String authorizationToken) {
 		this.authorizationToken = authorizationToken;
         return this;
 	}
