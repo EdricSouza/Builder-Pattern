@@ -2,7 +2,7 @@ package com.ucsal.Interface;
 
 import java.util.Map;
 
-import com.ucsal.HttpRequest.HttpRequest;
+import com.ucsal.HttpRequest.HttpRequestData;
 
 public interface IHttpRequestBuilder {
     IHttpRequestBuilder url (String url);
@@ -12,5 +12,5 @@ public interface IHttpRequestBuilder {
     IHttpRequestBuilder body (String body);
     IHttpRequestBuilder contentType (String contentType);
     IHttpRequestBuilder authorizationToken (String authorizationToken);
-    HttpRequest build();
+    HttpRequestData build();
 }

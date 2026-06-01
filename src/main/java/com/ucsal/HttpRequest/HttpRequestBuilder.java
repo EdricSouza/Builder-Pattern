@@ -50,8 +50,8 @@ public class HttpRequestBuilder implements IHttpRequestBuilder {
         return this;
 	}
     @Override
-    public HttpRequest build() {
-        return new HttpRequest(
+    public HttpRequestData build() {
+        return new HttpRequestData(
             url,
             method,
             headers,
