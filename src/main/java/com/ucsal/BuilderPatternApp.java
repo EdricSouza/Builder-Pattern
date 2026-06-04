@@ -1,5 +1,6 @@
 package com.ucsal;
 
+import java.net.http.HttpResponse;
 import java.util.Map;
 
 public class BuilderPatternApp {
@@ -8,11 +9,11 @@ public class BuilderPatternApp {
      * O problema principal dessa abordagem é que o construtor fica grande, cheio de null,
      * e a criação do objeto se torna pouco clara.
      * */
-    static void main() {
+    public static void main(String[] args) {
 
         HttpRequestData requestGet = new HttpRequestData(
                 "GET",
-                "https://api.ucsal.com/alunos",
+                "https://jsonplaceholder.typicode.com/users",
                 null,
                 Map.of("status", "ativo"),
                 null,
@@ -21,72 +22,45 @@ public class BuilderPatternApp {
         );
 
         System.out.println("### GET - ALUNOS ###");
-        System.out.println(getAlunos(requestGet));
+        HttpResponse<String> response = requestGet.send();
+
+        System.out.println("Status: " + response.statusCode());
+        System.out.println("Body: " + response.body());
+
+        System.out.println("________________________________________________");
 
         HttpRequestData requestPost = new HttpRequestData(
                 "POST",
-                "https://api.ucsal.com/alunos",
-                Map.of("Accept", "application/json"),
+                "https://jsonplaceholder.typicode.com/posts",
                 null,
-                "{\"nome\":\"João\"}",
+                null,
+                "{\"title\":\"Builder Pattern\",\"body\":\"Teste de POST\",\"userId\":1}",
                 "application/json",
                 "Bearer token123"
         );
 
         System.out.println("### POST - ALUNOS ###");
-        System.out.println(createAluno(requestPost));
+        HttpResponse<String> responsePost = requestPost.send();
+        System.out.println("Status: " + responsePost.statusCode());
+        System.out.println("Body: " + responsePost.body());
+
+        System.out.println("________________________________________________");
 
         HttpRequestData requestPut = new HttpRequestData(
                 "PUT",
-                "https://api.ucsal.com/alunos/1",
-                Map.of("Accept", "application/json"),
+                "https://jsonplaceholder.typicode.com/posts/1",
                 null,
-                "{\"nome\":\"João Atualizado\"}",
+                null,
+                "{\"title\":\"João Atualizado\",\"body\":\"Conteúdo atualizado\",\"userId\":1}",
                 "application/json",
                 "Bearer token123"
         );
 
         System.out.println("### PUT - ALUNOS ###");
-        System.out.println(updateAluno(requestPut));
+        HttpResponse<String> responsePut = requestPut.send();
+        System.out.println("Status: " + responsePut.statusCode());
+        System.out.println("Body: " + responsePut.body());
 
+        System.out.println("________________________________________________");
     }
-
-    static String getAlunos(HttpRequestData req) {
-        String filtroStatus = req.getQueryParams() != null
-                ? req.getQueryParams().getOrDefault("status", "todos")
-                : "todos";
-
-        return """
-                {
-                  "filtro": { "status": "%s" },
-                  "alunos": [
-                    { "id": 1, "nome": "João Silva",  "matricula": "2023001", "status": "ativo" },
-                    { "id": 2, "nome": "Maria Souza", "matricula": "2023002", "status": "ativo" }
-                  ]
-                }
-                """.formatted(filtroStatus);
-    }
-
-    static String createAluno(HttpRequestData req) {
-        return """
-                {
-                  "id": 4,
-                  "body_recebido": %s,
-                  "status": "ativo",
-                  "criadoEm": "2026-05-29T10:30:00Z"
-                }
-                """.formatted(req.getBody());
-    }
-
-    static String updateAluno(HttpRequestData req) {
-        String id = req.getUrl().substring(req.getUrl().lastIndexOf('/') + 1);
-        return """
-                {
-                  "id": %s,
-                  "body_recebido": %s,
-                  "atualizadoEm": "2026-05-29T10:35:00Z"
-                }
-                """.formatted(id, req.getBody());
-    }
-
 }
